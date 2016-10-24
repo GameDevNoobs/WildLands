@@ -121,13 +121,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Block.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>

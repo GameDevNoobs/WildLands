@@ -1,5 +1,4 @@
-﻿  SpriteSheet.cpp
-c:\users\гаррик\onedrive\документы\wildlands\wildlands\spritesheet.cpp(41): warning C4244: =: преобразование "float" в "LONG", возможна потеря данных
-c:\users\гаррик\onedrive\документы\wildlands\wildlands\spritesheet.cpp(50): warning C4244: =: преобразование "float" в "LONG", возможна потеря данных
+﻿  WinMain.cpp
+c:\users\гаррик\onedrive\документы\wildlands\wildlands\winmain.cpp(80): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
   WildLands.vcxproj -> C:\Users\Гаррик\OneDrive\Документы\WildLands\Debug\WildLands.exe
   WildLands.vcxproj -> C:\Users\Гаррик\OneDrive\Документы\WildLands\Debug\WildLands.pdb (Partial PDB)

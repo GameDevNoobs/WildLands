@@ -1,7 +1,6 @@
 #include <windowsx.h>
-#include "Graphics.h"
-#include "SpriteSheet.h"
 #include "Timer.h"
+#include "Map.h"
 
 
 void Render(Graphics *gfx);
@@ -9,6 +8,7 @@ bool Update(float time);
 
 SpriteSheet *ssh1;
 Timer *gameTime;
+Map *map;
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -50,10 +50,18 @@ int WINAPI WinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Graphics *gfx = new Graphics();
 	gfx->Initialize(hwnd, true);
 
+
+	//---------------------- ANIMATED HUMAN ------------------------
 	ssh1 = new SpriteSheet(gfx->device, "Male.png", 368, 64, 46);
+
+	//---------------------- MAKING GAME MAP ---------------------------
+	map = new Map(10);
+	map->GenerateMap(gfx);
+
+
 	gameTime = new Timer();
 
-	//-----------------------------------------------------------
+	//************************ MAIN LOOP *******************************
 
 	MSG msg;
 	msg.message = WM_NULL;
@@ -75,6 +83,8 @@ int WINAPI WinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 	}
 	
+	//******************************************************
+
 	delete ssh1;
 	delete gfx;
 	delete gameTime;
@@ -83,12 +93,14 @@ int WINAPI WinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 void Render(Graphics *gfx) {
 	D3DXVECTOR3 pos;
-	pos.x = 200;
-	pos.y = 200;
+	pos.x = 50;
+	pos.y = 50;
 	pos.z = 0;
 	gfx->ClearScreen(D3DCOLOR_XRGB(0, 100, 100));
 	gfx->BeginScene();
 
+	map->RenderMap();
+	
 	if (ssh1->IsInitialized()) {
 		ssh1->Draw(pos);
 	}
