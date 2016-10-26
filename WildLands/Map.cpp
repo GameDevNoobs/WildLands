@@ -10,13 +10,13 @@ Map::~Map() {
 	gameMap.clear();
 }
 
-void Map::GenerateMap(Graphics * _gfx) {
+void Map::GenerateMap(Graphics * _gfx, SpriteCache gs) {
 	Block *b;
 	D3DXVECTOR3 vec;
 
 	for (auto i = 0; i < mapSize; i++) {
 		for (auto j = 0; j < mapSize; j++) {
-			b = new Block(_gfx);
+			b = new Block(_gfx, gs);
 			vec.x = i;
 			vec.y = j;
 			b->SetBlock(vec);

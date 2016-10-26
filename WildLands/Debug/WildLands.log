@@ -1,4 +1,15 @@
 ﻿  WinMain.cpp
-c:\users\гаррик\onedrive\документы\wildlands\wildlands\winmain.cpp(80): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+c:\users\гаррик\onedrive\документы\wildlands\wildlands\winmain.cpp(82): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+  SpriteCache.cpp
+  Map.cpp
+c:\users\гаррик\onedrive\документы\wildlands\wildlands\map.cpp(6): warning C4244: аргумент: преобразование "double" в "unsigned int", возможна потеря данных
+c:\users\гаррик\onedrive\документы\wildlands\wildlands\map.cpp(20): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\users\гаррик\onedrive\документы\wildlands\wildlands\map.cpp(21): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+  Block.cpp
+c:\users\гаррик\onedrive\документы\wildlands\wildlands\block.cpp(15): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\гаррик\onedrive\документы\wildlands\wildlands\block.cpp(21): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\гаррик\onedrive\документы\wildlands\wildlands\block.cpp(26): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\users\гаррик\onedrive\документы\wildlands\wildlands\block.cpp(27): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+  Создание кода...
   WildLands.vcxproj -> C:\Users\Гаррик\OneDrive\Документы\WildLands\Debug\WildLands.exe
   WildLands.vcxproj -> C:\Users\Гаррик\OneDrive\Документы\WildLands\Debug\WildLands.pdb (Partial PDB)

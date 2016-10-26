@@ -17,6 +17,7 @@ class SpriteSheet {
 	int frameWidth;
 	int frameCount;
 	bool initialized;
+	std::string fileName;
 
 public:
 
@@ -27,6 +28,7 @@ public:
 	bool IsInitialized();
 	virtual bool Update(float time);
 	virtual void Draw(D3DXVECTOR3 position);
+	std::string GetFileName() { return fileName;}
 };
 
 #endif

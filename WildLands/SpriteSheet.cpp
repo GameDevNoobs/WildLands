@@ -6,6 +6,7 @@ SpriteSheet::SpriteSheet(IDirect3DDevice9 *device, std::string file, int width, 
 	initialized = false;
 	if (Initialize(device, file, width, height, _frameWidth))
 		initialized = true;
+	fileName = file;
 }
 
 bool SpriteSheet::Initialize(IDirect3DDevice9 *device, std::string file, int width, int height, int _frameWidth) {
@@ -36,7 +37,7 @@ bool SpriteSheet::IsInitialized() {
 }
 
 bool SpriteSheet::Update(float time) {
-	if (time >= 0.15f) {
+	if (time >= 0.1f) {
 		if (frame < frameCount) {
 			rct.left = frame * frameWidth;
 			rct.right = rct.left + frameWidth;

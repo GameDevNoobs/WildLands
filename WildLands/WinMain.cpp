@@ -53,10 +53,12 @@ int WINAPI WinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//---------------------- ANIMATED HUMAN ------------------------
 	ssh1 = new SpriteSheet(gfx->device, "Male.png", 368, 64, 46);
+	SpriteCache groundTex;
+	groundTex.Initialise(gfx, 1, "ground");
 
 	//---------------------- MAKING GAME MAP ---------------------------
-	map = new Map(10);
-	map->GenerateMap(gfx);
+	map = new Map(100);
+	map->GenerateMap(gfx, groundTex);
 
 
 	gameTime = new Timer();

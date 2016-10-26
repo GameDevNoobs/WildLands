@@ -1,8 +1,13 @@
 #include "Block.h"
 
-Block::Block(Graphics * _gfx) {
-
-	texture = new SpriteSheet(_gfx->device,"ground.png",32,16,32);
+Block::Block(Graphics * _gfx, SpriteCache gs) {
+	texId = 0;
+	std::string curBlockTex = "ground_" + std::to_string(texId)+".png";
+	for (auto iter = gs.GetStorage().begin(); iter != gs.GetStorage().end(); iter++) {
+		if (std::strcmp((*iter)->GetFileName().c_str(), curBlockTex.c_str()) == 0) {
+			texture = *iter;
+		}
+	}
 	accessibility = true;
 }
 

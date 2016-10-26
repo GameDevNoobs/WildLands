@@ -11,7 +11,7 @@ public:
 	Map(int N);
 	~Map();
 
-	void GenerateMap(Graphics * _gfx);
+	void GenerateMap(Graphics * _gfx, SpriteCache gs);
 	void RenderMap();
 };
 

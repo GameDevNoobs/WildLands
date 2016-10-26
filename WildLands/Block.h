@@ -1,17 +1,16 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
-#include "Graphics.h"
-#include "SpriteSheet.h"
-
+#include "SpriteCache.h"
 
 class Block {
 
 	D3DXVECTOR3 position, screenPosition;
 	SpriteSheet *texture;
 	bool accessibility;
+	int texId;
 public:
-	Block(Graphics * _gfx);
+	Block(Graphics * _gfx, SpriteCache gs);
 	~Block();
 	void RenderBlock();
 	void ComputeScreenPosition();
