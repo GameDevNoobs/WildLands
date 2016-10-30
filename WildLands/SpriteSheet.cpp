@@ -7,6 +7,9 @@ SpriteSheet::SpriteSheet(IDirect3DDevice9 *device, std::string file, int width, 
 	if (Initialize(device, file, width, height, _frameWidth))
 		initialized = true;
 	fileName = file;
+	position.x = 0;
+	position.y = 0;
+	position.z = 0;
 }
 
 bool SpriteSheet::Initialize(IDirect3DDevice9 *device, std::string file, int width, int height, int _frameWidth) {
@@ -57,9 +60,17 @@ bool SpriteSheet::Update(float time) {
 	return false;
 }
 
-void SpriteSheet::Draw(D3DXVECTOR3 position) {
 
-	if (sprite&&texture) {
+inline bool CheckScreenPosition(D3DXVECTOR3 position, int _wndWidth, int _wndHight) {
+	return ((position.x<-64||position.x>=_wndWidth)||(position.y<-32||position.y>=_wndHight)) ? false : true;
+
+}
+
+
+void SpriteSheet::Draw(int posX, int posY, int _wndWidth, int _wndHight) {
+	position.x = posX;
+	position.y = posY;
+	if (CheckScreenPosition(position,_wndWidth, _wndHight)&&sprite&&texture) {
 		sprite->Begin(D3DXSPRITE_ALPHABLEND);
 		sprite->Draw(texture, &rct, NULL, &position, color);
 		sprite->End();

@@ -1,14 +1,8 @@
 #include <windowsx.h>
-#include "Timer.h"
-#include "Map.h"
+#include "GameController.h"
 
-
-void Render(Graphics *gfx);
-bool Update(float time);
-
-SpriteSheet *ssh1;
-Timer *gameTime;
-Map *map;
+int wndWidth, wndHight;
+Graphics * gfx;
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -19,6 +13,27 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 		PostQuitMessage(0);
 		return 0;
 	} break;
+	case WM_KEYDOWN:
+		switch (wParam) {
+		case 'A':
+		case VK_LEFT:
+			GameController::camPosition.x++;
+			break;
+		case 'D':
+		case VK_RIGHT:
+			GameController::camPosition.x--;
+			break;
+		case 'S':
+		case VK_DOWN:
+			GameController::camPosition.y--;
+			break;
+		case 'W':
+		case VK_UP:
+			GameController::camPosition.y++;
+			break;
+		}
+	break;
+
 	}
 	return DefWindowProc(hWnd, message, wParam, lParam);
 }
@@ -44,24 +59,14 @@ int WINAPI WinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return (-1);
 	}
 	
-	hwnd = CreateWindowEx(NULL,	"WildLands", "WildLands", WS_OVERLAPPEDWINDOW,  100, 100, 800, 640, NULL, NULL, hInstance, NULL);
+	wndWidth = 800;
+	wndHight = 640;
+
+	hwnd = CreateWindowEx(NULL,	"WildLands", "WildLands", WS_OVERLAPPEDWINDOW,  100, 100, wndWidth, wndHight, NULL, NULL, hInstance, NULL);
 	ShowWindow(hwnd, nCmdShow);
 
-	Graphics *gfx = new Graphics();
-	gfx->Initialize(hwnd, true);
-
-
-	//---------------------- ANIMATED HUMAN ------------------------
-	ssh1 = new SpriteSheet(gfx->device, "Male.png", 368, 64, 46);
-	SpriteCache groundTex;
-	groundTex.Initialise(gfx, 1, "ground");
-
-	//---------------------- MAKING GAME MAP ---------------------------
-	map = new Map(100);
-	map->GenerateMap(gfx, groundTex);
-
-
-	gameTime = new Timer();
+	gfx = new Graphics();
+	GameController::Initialize(gfx, hwnd, wndWidth, wndHight);
 
 	//************************ MAIN LOOP *******************************
 
@@ -78,39 +83,12 @@ int WINAPI WinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (msg.message == WM_QUIT) break;
 		else
 		{
-			gameTime->Current();
-			if (Update(gameTime->GetTimeInSec()))
-				gameTime->Previous();
-			Render(gfx);
+			GameController::Update();
+			GameController::Render(gfx, wndWidth, wndHight);
 		}
 	}
 	
 	//******************************************************
-
-	delete ssh1;
 	delete gfx;
-	delete gameTime;
 	return msg.wParam;
-}
-
-void Render(Graphics *gfx) {
-	D3DXVECTOR3 pos;
-	pos.x = 50;
-	pos.y = 50;
-	pos.z = 0;
-	gfx->ClearScreen(D3DCOLOR_XRGB(0, 100, 100));
-	gfx->BeginScene();
-
-	map->RenderMap();
-	
-	if (ssh1->IsInitialized()) {
-		ssh1->Draw(pos);
-	}
-
-	gfx->EndScene();
-	gfx->Present();
-}
-
-bool Update(float time) {
-	return ssh1->Update(time);
 }

@@ -25,8 +25,8 @@ void Map::GenerateMap(Graphics * _gfx, SpriteCache gs) {
 	}
 }
 
-void Map::RenderMap() {
+void Map::RenderMap(int posX, int posY, int _wndWidth, int _wndHight) {
 	for (auto iter = gameMap.begin(); iter != gameMap.end(); iter++) {
-		(*iter)->RenderBlock();
+		(*iter)->RenderBlock(posX,  posY, _wndWidth, _wndHight);
 	}
 }

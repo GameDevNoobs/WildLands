@@ -12,7 +12,7 @@ public:
 	~Map();
 
 	void GenerateMap(Graphics * _gfx, SpriteCache gs);
-	void RenderMap();
+	void RenderMap(int posX, int posY, int _wndWidth, int _wndHight);
 };
 
 #endif

@@ -1,34 +1,29 @@
 #include "Block.h"
+#include <math.h>
+
 
 Block::Block(Graphics * _gfx, SpriteCache gs) {
 	texId = 0;
-	std::string curBlockTex = "ground_" + std::to_string(texId)+".png";
-	for (auto iter = gs.GetStorage().begin(); iter != gs.GetStorage().end(); iter++) {
-		if (std::strcmp((*iter)->GetFileName().c_str(), curBlockTex.c_str()) == 0) {
-			texture = *iter;
-		}
-	}
+	std::string curBlockTex = "ground_" + std::to_string(texId) + ".png";
+	texture = gs.GetTexturePtr(curBlockTex);
 	accessibility = true;
 }
 
-inline int ToScreenX(D3DXVECTOR3 _map) {
-	int screenX = (_map.x - _map.y) * 16;
-	return screenX;
+inline int ToScreenX(D3DXVECTOR3 _map, int texWidth, int texHeight) {
+	return ((int)_map.y % 2 == 0) ? _map.x * texWidth : _map.x * texWidth + texWidth/2;
 }
 
-inline int ToScreenY(D3DXVECTOR3 _map) {
-
-	int screenY = (_map.x + _map.y) * 8;
-	return screenY;
+inline int ToScreenY(D3DXVECTOR3 _map, int texWidth, int texHeight) {
+	return ((int)_map.y % 2 == 0) ? _map.y * texHeight - (floor(_map.y/2)*texHeight) : _map.y * texHeight - texHeight/2 - (floor(_map.y / 2) * texHeight);
 }
 
 void Block::ComputeScreenPosition() {
-	screenPosition.x = ToScreenX(position);
-	screenPosition.y = ToScreenY(position);
+	screenPosition.x = ToScreenX(position, texture->GetSize().right, texture->GetSize().bottom);
+	screenPosition.y = ToScreenY(position, texture->GetSize().right, texture->GetSize().bottom);
 }
 
-void Block::RenderBlock() {
-	texture->Draw(screenPosition);
+void Block::RenderBlock(int posX, int posY, int _wndWidth, int _wndHight) {
+	texture->Draw(screenPosition.x+posX, screenPosition.y + posY, _wndWidth, _wndHight);
 }
 
 void Block::SetBlock(D3DXVECTOR3 _vec) {

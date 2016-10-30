@@ -12,7 +12,7 @@ class Block {
 public:
 	Block(Graphics * _gfx, SpriteCache gs);
 	~Block();
-	void RenderBlock();
+	void RenderBlock(int posX, int posY, int _wndWidth, int _wndHight);
 	void ComputeScreenPosition();
 	void SetBlock(D3DXVECTOR3 _vec);
 };

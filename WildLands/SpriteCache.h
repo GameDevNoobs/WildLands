@@ -3,16 +3,16 @@
 
 #include "Graphics.h"
 #include "SpriteSheet.h"
-#include <vector>
+#include <map>
 
 class SpriteCache {
 
-	std::vector<SpriteSheet*> spriteStorage;
+	std::map<std::string, SpriteSheet*> spriteStorage;
 	SpriteSheet *tex;
 public:
 	void Initialise(Graphics *gfx, int _n, std::string _name);
 	void SpritesOut();
-	std::vector<SpriteSheet*> GetStorage() { return spriteStorage; }
+	SpriteSheet* GetTexturePtr(std::string id);
 };
 
 #endif
